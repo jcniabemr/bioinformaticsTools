@@ -2,7 +2,8 @@
 
 ########################################################################
 # Script to produce DNA and or protein CDS fasta from gff and assembly #
-# Usage example "python createCDS.py --gff --fasta --protein --CDS"    #
+# Usage example:                                                       #
+# python createCDS.py --gff <.gff> --fasta <.fasta> --strainName <x>   #
 # ***Note Type field should be ordered as"gene,mRNA,CDS" descending*** #
 # Written by John Connell                                              #
 # john.connell@niab.com                                                #
