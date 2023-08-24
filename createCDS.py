@@ -125,5 +125,13 @@ for x in gffData:
     if x[2]=="CDS":
             DNASeq+=cutCDS(x[0],int(x[3]),int(x[4]))
             continue 
+if orient=="-":
+    DNASeq=reverseComplement(DNASeq)
+DNA_CDS_Out.write(".".join([">g"+str(geneNUM),"t"+str(cdsNUM)])+"\n")
+PROTEIN_CDS_out.write(".".join([">g"+str(geneNUM),"t"+str(cdsNUM)])+"\n")
+DNA_CDS_Out.write("\n".join([DNASeq[i:i+60] for i in range(0,len(DNASeq),60)])+"\n")
+PROTEINSeq=translate(DNASeq)
+PROTEIN_CDS_out.write("\n".join([PROTEINSeq[i:i+60] for i in range(0,len(PROTEINSeq),60)])+"\n")
+
 DNA_CDS_Out.close()
 PROTEIN_CDS_out.close()
