@@ -5,7 +5,8 @@
 # Usage example:                                                       #
 # python createCDS.py --gff <.gff> --fasta <.fasta> --strainName <x>   #
 # ***Note Type field should be ordered as"gene,mRNA,CDS" descending*** #
-# Written by John Connell                                              #
+#             ***This can be achieved using sortGFFs.py***             #
+# Written by John Connell                                                #
 # john.connell@niab.com                                                #
 # NIAB                                                                 #
 # 2023                                                                 #
