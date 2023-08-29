@@ -76,6 +76,7 @@ def RemoveDupsLongestIsoform(orderedDict):
 				processedFeature.add(tuple(y))
 	return gff
 
+####Rename all features according to gene and feature count. 
 def locateFeatures(gff):
 	renamedGff = []
 	geneCounter = 0
@@ -132,7 +133,7 @@ def writeRes(file):
 		for x in file:
 			outfile.write(f"{x}\n")
 
-####Run script
+####Main func.
 def main():
 	import argparse 
 	ap = argparse.ArgumentParser()
@@ -153,5 +154,6 @@ def main():
 	parse.gff)
 	)))))
 
+####Run prog.
 if __name__=="__main__":
 	main()
