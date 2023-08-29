@@ -37,7 +37,6 @@ def createGeneGroups(i):
 			for y in i:
 				if int(y[3]) >= int(x[3]) and int(y[4]) <= int(x[4]) and y[0] == x[0]:
 					geneGroup[gene].append(y)
-			print(geneGroup[gene])
 	return geneGroup
 
 ####Criteria to order features within gene groups. 
@@ -60,7 +59,6 @@ def orderFeatures(geneDict):
 	from collections import OrderedDict
 	orderedGeneDict = OrderedDict()
 	for gene, feature in geneDict.items():
-		print(geneDict[gene])
 		orderedFeatures = sorted(
 			feature, 
 			key = orderCriteria)
@@ -81,36 +79,50 @@ def RemoveDupsLongestIsoform(orderedDict):
 def locateFeatures(gff):
 	renamedGff = []
 	geneCounter = 0
-	transcriptCounter = 0 
-	exonCounter = 0 
 	for x in gff:
 		if x[2] == "gene": 
 			geneCounter += 1
-			transcriptCounter = 0
-			exonCounter = 0
-			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter])))
+			transcriptCounter = 0 
+			exonCounter = 0 
+			cdsCounter = 0
+			startCounter = 0 
+			stopCounter = 0
+			intronCounter = 0
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,";"])))
 			renamedGff.append("\t".join(x[0:9]))
 			continue
 		elif x[2] == "mRNA":
 			transcriptCounter += 1
-			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,";Parent=g",geneCounter])))
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,";Parent=g",geneCounter,";"])))
 			renamedGff.append("\t".join(x[0:9]))
 			continue 
-		elif x[2] == "stop_codon" or x[2] == "start_codon" or x[2] == "intron":
-			x[8] = x[8].replace(x[8],"".join(map(str,["Parent=g",geneCounter,".t",transcriptCounter])))
+		elif x[2] == "start_codon":
+			startCounter += 1 
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".start",startCounter,";Parent=g",geneCounter,".t",transcriptCounter,";"])))
+			renamedGff.append("\t".join(x[0:9])) 
+			continue 
+		elif x[2] == "stop_codon": 
+			stopCounter += 1
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".stop",stopCounter,";Parent=g",geneCounter,".t",transcriptCounter,";"])))
+			renamedGff.append("\t".join(x[0:9])) 
+			continue 
+		elif x[2] == "intron":
+			intronCounter += 1
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".intron",intronCounter,";Parent=g",geneCounter,".t",transcriptCounter,";"])))
 			renamedGff.append("\t".join(x[0:9])) 
 			continue 
 		elif x[2] == "exon":
 			exonCounter += 1
-			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".exon",exonCounter,";Parent=g",geneCounter,".t",transcriptCounter])))
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".exon",exonCounter,";Parent=g",geneCounter,".t",transcriptCounter,";"])))
 			renamedGff.append("\t".join(x[0:9]))
 			continue 
 		elif x[2] == "CDS":
-			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".cds;Parent=g",geneCounter,".t",transcriptCounter])))
+			cdsCounter += 1 
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".CDS",cdsCounter,";Parent=g",geneCounter,".t",transcriptCounter,";"])))
 			renamedGff.append("\t".join(x[0:9]))
 			continue 
 		else:
-			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,";Parent=g",geneCounter])))
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,".",x[2],";Parent=g",geneCounter,".t",transcriptCounter,";"])))
 			renamedGff.append("\t".join(x[0:9]))
 	return renamedGff
 
