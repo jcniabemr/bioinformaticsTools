@@ -2,8 +2,7 @@
 
 ########################################################################
 # Script to combine one or more gff files into a single file,          # 
-# remove duplicated features, take the longest isoform,                #
-# sort and rename features uniformly                                   #
+# remove duplicated features, sort and rename features uniformly.      #
 #                                                                      #
 # Usage example:                                                       #
 # python sortGFFs.py --gff <.gff1 .gff2 .gff3 .gffX>                   #
@@ -52,7 +51,7 @@ def orderCriteria(feature):
 	elif feature[2] == "mRNA":
 		return (tn,2)
 	else:
-		return (tn,3,feature[3])
+		return (tn,3,int(feature[3]))
 
 ####Order features.
 def orderFeatures(geneDict):

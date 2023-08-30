@@ -1,7 +1,7 @@
 Bioinformatics tools that i have written in python for various tasks  
 
 
-1.) gffSort.py: For combining, sorting, duplicate removal and renaming features for 1+ gff files.
+1.) gffSort.py: For combining, sorting, duplicate removal and renaming features for 1+ gff files. Use bcftools intersect prior to combining multiple gff files 
 
 	python gffSort.py --gff file1.gff file2.gff file3.gff fileX.gff
 
