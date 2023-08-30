@@ -34,7 +34,7 @@ def createGeneGroups(i):
 			gene="_".join([x[2],x[3],x[4]])
 			geneGroup[gene] = []
 			for y in i:
-				if int(y[3]) >= int(x[3]) and int(y[4]) <= int(x[4]) and y[0] == x[0]:
+				if y[0] == x[0] and int(y[3]) >= int(x[3]) and int(y[4]) <= int(x[4]) and x[6] == y[6]:
 					geneGroup[gene].append(y)
 	return geneGroup
 
@@ -92,6 +92,10 @@ def locateFeatures(gff):
 			renamedGff.append("\t".join(x[0:9]))
 			continue
 		elif x[2] == "mRNA":
+			transcriptCounter += 1
+			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,";Parent=g",geneCounter,";"])))
+			renamedGff.append("\t".join(x[0:9]))
+		elif x[2] == "tRNA":
 			transcriptCounter += 1
 			x[8] = x[8].replace(x[8],"".join(map(str,["ID=g",geneCounter,".t",transcriptCounter,";Parent=g",geneCounter,";"])))
 			renamedGff.append("\t".join(x[0:9]))
