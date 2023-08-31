@@ -27,7 +27,7 @@ def parseInfo(file,chunkSize):
 	fileCounter = 0
 	seq = ""
 	with open(file,'r') as f:
-		data=[x.strip() for x in f.readlines()]
+		data=[x.strip() for x in f.readlines() if not x.startswith("#")]
 	for x in data:
 		if x.startswith(">"):
 			if contigFound:
