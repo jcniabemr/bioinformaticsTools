@@ -18,7 +18,7 @@ def parseFiles(gff):
 	catData = []
 	for x in gff:
 		with open(x,'r') as f:
-			data = [x.strip().split() for x in f if not x.startswith("#")]
+			data = [x.strip().split() for x in f.readlines() if not x.startswith("#")]
 			catData.extend(data)
 	sortedCatData = sorted(
 		catData,

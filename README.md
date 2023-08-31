@@ -10,3 +10,6 @@ Bioinformatics tools that i have written in python for various tasks
 
 	python createCDS.py --gff file.gff --fasta file.fasta --strainName output prefix name
     
+3.) chunkGenome.py: For cutting up DNA genome or proteome into chunks. 
+
+	python chunkGenome.py --infile genome.fasta --chunkSize 1000 
