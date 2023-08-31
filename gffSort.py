@@ -64,8 +64,8 @@ def orderFeatures(geneDict):
 		orderedGeneDict[gene] = orderedFeatures
 	return orderedGeneDict
 
-####Remove dups and take longes isoform.
-def RemoveDupsLongestIsoform(orderedDict):
+####Remove duplicated features.
+def RemoveDups(orderedDict):
 	processedFeature = set()
 	gff = []
 	for x in orderedDict.values():
@@ -150,7 +150,7 @@ def main():
 	parse = ap.parse_args()
 	writeRes(
 	locateFeatures(
-	RemoveDupsLongestIsoform(
+	RemoveDups(
 	orderFeatures(
 	createGeneGroups(
 	parseFiles(
