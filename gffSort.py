@@ -155,6 +155,6 @@ def main():
 
 ####Run prog.
 if __name__=="__main__":
-	import argparse, re
+	import argparse,re
 	from collections import OrderedDict
 	main()

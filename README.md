@@ -17,3 +17,7 @@ Bioinformatics tools that i have written in python for various tasks
 4.) trimDArTseqAdapters.py: For trimming the DarTseq barcode region from sequencing reads. Read files can be listed space seperated. 
 
 	python trimDArTseqAdapters.py --reads file1.gz file2.gz file3.gz filex.gz 
+
+4.) createSNPtiles.py: For counting tiles of variants given a tile size. 
+	
+	python createSNPtiles.py --vcf <vcf file> --windowSize <numberic window size>
