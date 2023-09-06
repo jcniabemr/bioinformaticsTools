@@ -11,27 +11,34 @@
 # 2023                                                                 #
 ########################################################################
 
-#def writeRes():
-
+def writeRes(i,c):
+	resultFile = os.path.splitext(c)[0] + ".SNP_windows.txt"
+	with open(resultFile,'w') as out:
+		out.write("\t".join(map(str,["Contig","Number of SNPs","Window number"]))+"\n\n")
+		for x in i:
+			out.write(f"{x}\n") 
 
 def openSort(vcf):
 	with open(vcf, 'r') as fi:
-		vcfData=[x.strip().split() for x in fi.readlines() if not x.startswith("#")]
-		sortedData=sorted(
+		vcfData = [x.strip().split() for x in fi.readlines() if not x.startswith("#")]
+		sortedData = sorted(
 			vcfData, 
 			key = lambda i: (int(i[0].split("_")[1]), int(i[1])))
 	return sortedData
 
-def createWindows(vcf,window):
+def createWindows(vcf,windowSize):
 	sortedData=openSort(vcf)
 	contigTracker = ""
 	lenTracker = 0
 	snpCount = 0
+	windowNumber = 0
+	windowResults = []
 	for x in sortedData:
 		if contigTracker == "":
 			contigTracker = x[0]
 			lenTracker = int(x[1])
 			snpCount += 1
+			windowNumber += 1
 			windowTracker = 0
 			continue
 		if x[0] == contigTracker:
@@ -41,28 +48,22 @@ def createWindows(vcf,window):
 				lenTracker = int(x[1])
 				continue
 			else:
-				results.write("\t".join(map(str,[contigTracker,snpCount,"\n"])))
+				windowResults.append("\t".join(map(str,[contigTracker,snpCount,windowNumber])))
 				snpCount = 1
+				windowNumber += 1
 				windowTracker = 0
 				lenTracker = int(x[1])
 				continue
 		if x[0] != "" and x[0] != contigTracker:
-			results.write("\t".join(map(str,[contigTracker,snpCount,"\n"])))
-			contigTracker=x[0]
-			snpCount=1
-			windowTracker=0
-			lenTracker=int(x[1])
+			windowResults.append("\t".join(map(str,[contigTracker,snpCount,windowNumber])))
+			contigTracker = x[0]
+			snpCount = 1
+			windowNumber = 1
+			windowTracker = 0
+			lenTracker = int(x[1])
 			continue
-	results.write("\t".join(map(str,[contigTracker,snpCount,"\n"])))
-	results.close()
-
-
-
-
-
-
-
-
+	windowResults.append("\t".join(map(str,[contigTracker,snpCount,windowNumber])))
+	writeRes(windowResults,vcf)
 
 def main():
 	ap=argparse.ArgumentParser()
@@ -82,5 +83,5 @@ def main():
 	createWindows(parse.vcf,parse.windowSize)
 
 if __name__=="__main__":
-	import argparse
+	import argparse,os
 	main()
