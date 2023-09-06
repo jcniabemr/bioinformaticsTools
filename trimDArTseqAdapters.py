@@ -84,8 +84,6 @@ def main():
     parse=ap.parse_args()
     trimBarcodes(parse.reads)
 
-import argparse
-import os
-import gzip
 if __name__=="__main__":
+    import argparse,os,gzip
     main()

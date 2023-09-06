@@ -27,7 +27,6 @@ def parseFiles(gff):
 
 ####Extract gene groups ascending. 
 def createGeneGroups(i):
-	from collections import OrderedDict
 	geneGroup = OrderedDict()
 	for x in i:
 		if x[2] == "gene":
@@ -40,7 +39,6 @@ def createGeneGroups(i):
 
 ####Criteria to order features within gene groups. 
 def orderCriteria(feature):
-	import re
 	transcriptNumber = re.match(r".*\.t(\d+)",feature[-1])
 	if transcriptNumber:
 		tn = int(transcriptNumber.group(1))
@@ -55,7 +53,6 @@ def orderCriteria(feature):
 
 ####Order features.
 def orderFeatures(geneDict):
-	from collections import OrderedDict
 	orderedGeneDict = OrderedDict()
 	for gene, feature in geneDict.items():
 		orderedFeatures = sorted(
@@ -137,8 +134,7 @@ def writeRes(file):
 			outfile.write(f"{x}\n")
 
 ####Main func.
-def main():
-	import argparse 
+def main(): 
 	ap = argparse.ArgumentParser()
 	ap.add_argument(
 		'--gff',
@@ -159,4 +155,6 @@ def main():
 
 ####Run prog.
 if __name__=="__main__":
+	import argparse, re
+	from collections import OrderedDict
 	main()

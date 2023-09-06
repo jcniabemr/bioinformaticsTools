@@ -50,8 +50,7 @@ def parseInfo(file,chunkSize):
 	writeFile(file,(chunkSize * int(fileCounter)),chunkFile)
 
 ####Main func.
-def main():
-	import argparse 
+def main(): 
 	ap = argparse.ArgumentParser()
 	ap.add_argument(
 		'--infile',
@@ -71,4 +70,5 @@ def main():
 
 ####Run prog.
 if __name__=="__main__":
+	import argparse
 	main()
