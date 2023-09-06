@@ -13,3 +13,7 @@ Bioinformatics tools that i have written in python for various tasks
 3.) chunkGenome.py: For cutting up DNA genome or proteome into chunks. 
 
 	python chunkGenome.py --infile genome.fasta --chunkSize 1000 
+
+4.) trimDArTseqAdapters.py: For trimming the DarTseq barcode region from sequencing reads. Read files can be listed space seperated. 
+
+	python trimDArTseqAdapters.py --reads file1.gz file2.gz file3.gz filex.gz 
