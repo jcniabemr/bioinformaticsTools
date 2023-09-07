@@ -18,6 +18,10 @@ Bioinformatics tools that i have written in python for various tasks
 
 	python trimDArTseqAdapters.py --reads file1.gz file2.gz file3.gz filex.gz 
 
-5.) createSNPtiles.py: For counting tiles of variants given a tile size. 
+5.) createSNPtiles.py: For counting the number of variants in a given tile size. 
 	
-	python createSNPtiles.py --vcf <vcf file> --windowSize <numberic window size>
+	python createSNPtiles.py --vcf x.vcf --windowSize 1000
+
+6.) renameContigs.py: For renaming contigs in a fasta file. Contigs will be renamed to any string given adter the --contigName flag
+
+	python renameConigs.py --assembly x.fasta --contigName contig
