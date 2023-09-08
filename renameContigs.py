@@ -20,13 +20,13 @@ def writeRes(i,c):
 
 def renameContigs(assembly,name):
 	results = []
-	contigCouter = 0
+	contigCounter = 0
 	with open(assembly,'r') as fi:
 		data=[x.strip() for x in fi.readlines() if not x.startswith("#")]
 		for x in data:
 			if x.startswith(">"):
-				contigCouter += 1
-				results.append(x.replace(x,"".join(map(str,[">",name,"_",contigCouter]))))
+				contigCounter += 1
+				results.append(x.replace(x,"".join(map(str,[">",name,"_",contigCounter]))))
 			else:
 				results.append(x)
 	writeRes(results,assembly)
