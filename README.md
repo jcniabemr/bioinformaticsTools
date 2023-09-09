@@ -25,3 +25,7 @@ Bioinformatics tools that i have written in python for various tasks
 6.) renameContigs.py: For renaming contigs in a fasta file. Contigs will be renamed to any string given adter the --contigName flag
 
 	python renameConigs.py --assembly x.fasta --contigName contig
+
+7.) genomeToReads.py: For cutting an assmebled genome into reads of specified length and step. 
+
+	python genomeToReads.py --g genome.fasta --readL 300 --readS 50
