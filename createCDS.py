@@ -45,11 +45,15 @@ def cutCDS(contig,start,stop):
             cutFasta+=x
     return cutFasta[start-1:stop]
 
-def reverseComplement(seq):
-    baseComplement={'G':'C','C':'G','A':'T','T':'A'}
-    reversedSeq=seq[::-1]
-    reversedComplemented=''.join(baseComplement[x] for x in reversedSeq)
-    return reversedComplemented
+def reverseComplement(c):
+    baseComplement={
+            'G':'C',
+            'C':'G',
+            'A':'T',
+            'T':'A',
+            'N':'N'
+    }
+    return "".join(baseComplement[i] for i in reversed(c))
 
 def translate(DNAseq):
     translationTable={
