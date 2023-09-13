@@ -29,3 +29,7 @@ Bioinformatics tools that i have written in python for various tasks
 7.) genomeToReads.py: For cutting an assmebled genome into reads of specified length and step. 
 
 	python genomeToReads.py --g genome.fasta --readL 300 --readS 50
+
+8.) findMimpSequences.py: For identifying MIMP sequences in Fusarium genomes. 
+
+	python findMimpSequences.py --fasta assembly.fasta

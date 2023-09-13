@@ -29,12 +29,14 @@ def cut_genome(seq,read_length,step,header,forward,reverse):
         headerName = f"@{header[1:]} {region}" 
         sequence = seq[i:i + read_length]
         rev_comp_seq = reverse_complement(sequence)
+####Write forward reads         
         forward.write(" ".join([headerName,"TSFR\n"]))
         forward.write(f"{sequence}\n")
         forward.write(f"+\n{'F' * read_length}\n")
         forward.write(" ".join([headerName,"RCFR\n"]))
         forward.write(f"{rev_comp_seq}\n")
         forward.write(f"+\n{'F' * read_length}\n")
+#####Write reverse         
         reverse.write(" ".join([headerName,"TSRR\n"]))
         reverse.write(f"{sequence}\n")
         reverse.write(f"+\n{'F' * read_length}\n")
