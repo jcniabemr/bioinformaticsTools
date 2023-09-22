@@ -53,7 +53,7 @@ def reverseComplement(c):
             'T':'A',
             'N':'N'
     }
-    return "".join(baseComplement[i] for i in reversed(c))
+    return "".join(baseComplement[i] for i in reversed(c.upper()))
 
 def translate(DNAseq):
     translationTable={
@@ -79,7 +79,7 @@ def translate(DNAseq):
     for x in DNAseq:
         cSeq+=x
         if len(cSeq)==3:
-            AA=translationTable.get(cSeq,"") 
+            AA=translationTable.get(cSeq.upper(),"") 
             proteinSeq+=AA
             cSeq=""
     return proteinSeq
@@ -103,7 +103,7 @@ for x in gffData:
                 DNASeq=reverseComplement(DNASeq)
             DNA_CDS_Out.write(".".join([">g"+str(geneNUM),"t"+str(cdsNUM)])+"\n")
             PROTEIN_CDS_out.write(".".join([">g"+str(geneNUM),"t"+str(cdsNUM)])+"\n")
-            DNA_CDS_Out.write("\n".join([DNASeq[i:i+60] for i in range(0,len(DNASeq),60)])+"\n")
+            DNA_CDS_Out.write("\n".join([DNASeq[i:i+60].upper() for i in range(0,len(DNASeq),60)])+"\n")
             PROTEINSeq=translate(DNASeq)
             PROTEIN_CDS_out.write("\n".join([PROTEINSeq[i:i+60] for i in range(0,len(PROTEINSeq),60)])+"\n")
             DNASeq=""

@@ -32,20 +32,20 @@ def writeGFF(sortedhits, filename):
 
 def mimpSearch(contig,sequence):
     foundHits = []
-    strictHitsPos = re.compile(r'CAGTGGGGTGCAATAAGTTTGAATACA').finditer(sequence)
-    strictHitsNeg = re.compile(r'TGTATTCAAACTTATTGCACCCCACTG').finditer(sequence)
+    strictHitsPos = re.compile(r'CAGTGGGGTGCAATAAGTTTGAATACA', re.IGNORECASE).finditer(sequence)
+    strictHitsNeg = re.compile(r'TGTATTCAAACTTATTGCACCCCACTG', re.IGNORECASE).finditer(sequence)
     for x in strictHitsPos:
         foundHits.append("\t".join(map(str,[contig[1:],x.start(),x.end(),x.group(),"+","Strict"])))
     for x in strictHitsNeg:
         foundHits.append("\t".join(map(str,[contig[1:],x.start(),x.end(),x.group(),"-","Strict"])))
-    moderateHitsPos = re.compile(r'CAGT[GA][GA]G[GA][TG]GCAA.AAGT[TA]T.AAT.C[AC]').finditer(sequence)
-    moderateHitsNeg = re.compile(r'[GT]G.ATT.A[TA]ACTT.TTGC[CA][TC]C[TC][TC]ACTG').finditer(sequence)
+    moderateHitsPos = re.compile(r'CAGT[GA][GA]G[GA][TG]GCAA.AAGT[TA]T.AAT.C[AC]', re.IGNORECASE).finditer(sequence)
+    moderateHitsNeg = re.compile(r'[GT]G.ATT.A[TA]ACTT.TTGC[CA][TC]C[TC][TC]ACTG', re.IGNORECASE).finditer(sequence)
     for x in moderateHitsPos:
         foundHits.append("\t".join(map(str,[contig[1:],x.start(),x.end(),x.group(),"+","Moderate"])))
     for x in moderateHitsNeg:
         foundHits.append("\t".join(map(str,[contig[1:],x.start(),x.end(),x.group(),"-","Moderate"])))
-    looseHitsPos = re.compile(r'CA.T..G..GCAA..A.T.T.......').finditer(sequence)
-    looseHitsNeg = re.compile(r'.......A.A.T..TTGC..C..A.TG').finditer(sequence)
+    looseHitsPos = re.compile(r'CA.T..G..GCAA..A.T.T.......', re.IGNORECASE).finditer(sequence)
+    looseHitsNeg = re.compile(r'.......A.A.T..TTGC..C..A.TG', re.IGNORECASE).finditer(sequence)
     for x in looseHitsPos:
         foundHits.append("\t".join(map(str,[contig[1:],x.start(),x.end(),x.group(),"+","Loose"])))
     for x in looseHitsNeg:
