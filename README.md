@@ -34,7 +34,7 @@ Bioinformatics tools that i have written in python for various tasks
 
 	python findMimpSequences.py --fasta assembly.fasta
 
-9.) variantEffectPredictor.sh: For analysis of SNPs to predict alterations to amino acid sequence and severity of SNP
+9.) variantEffectPredictor.sh: For analysis of SNPs from VCF file to predict alterations to amino acid sequence, SNP type and severity of each SNP
 	
 	bash variantEffectPredictor.sh --vcf file.vcf --gff file.gff --fasta genomeAssembly.fasta 
 
