@@ -35,7 +35,6 @@ def createFastaDiploid(vcf):
 			fastaFile.append("".join([">",data[0][i]]))
 			seq = ""
 			for x in data[1:]:
-				genotype = ""
 				if len(x[3]) > 1 or len(x[4]) > 1:
 					continue
 				ref = x[3]
