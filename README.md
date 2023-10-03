@@ -41,3 +41,8 @@ Bioinformatics tools that i have written in python for various tasks
 10.) vcf_to_fasta.py: For producing a fasta sequence for each sample in a VCF file.
 	
 	python vcf_to_fasta.py --vcf file.vcf --ploidy 1 OR 2 
+
+11.) vcf_to_matrix.py: For converting a VCF file into a matrix.
+
+	python vcf_to_matrix.py --vcf file.vcf --ploidy 1 OR 2
+
