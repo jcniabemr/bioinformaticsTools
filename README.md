@@ -46,3 +46,6 @@ Bioinformatics tools that i have written in python for various tasks
 
 	python vcf_to_matrix.py --vcf file.vcf --ploidy 1 OR 2
 
+12.) vcf_similairty_matrix.py: For creation of a data matrix detailing an all vs all % sample similarity 
+	
+	python vcf_similairty_matrix.py --vcf file.vcf --ploidy 1 OR 2
