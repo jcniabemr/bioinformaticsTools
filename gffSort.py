@@ -31,9 +31,10 @@ def createGeneGroups(i):
 	for x in i:
 		if x[2] == "gene":
 			gene="_".join([x[2],x[3],x[4]])
+			ID = re.search(r'ID=(g\d+)', x[8]).group(1)
 			geneGroup[gene] = []
 			for y in i:
-				if y[0] == x[0] and int(y[3]) >= int(x[3]) and int(y[4]) <= int(x[4]) and x[6] == y[6]:
+				if y[0] == x[0] and int(y[3]) >= int(x[3]) and int(y[4]) <= int(x[4]) and x[6] == y[6] and re.search(ID, y[8]):
 					geneGroup[gene].append(y)
 	return geneGroup
 

@@ -49,3 +49,7 @@ Bioinformatics tools that i have written in python for various tasks
 12.) vcf_similairty_matrix.py: For creation of a data matrix detailing an all vs all % sample similarity 
 	
 	python vcf_similairty_matrix.py --vcf file.vcf --ploidy 1 OR 2
+
+13.) filterContifs.py: For filtering out small contigs from a genome assembly, renaming contigs and wrapping sequences
+	
+	python filterContifs.py --fasta <.fasta> --minLengh <500>  --contigName <contig> 

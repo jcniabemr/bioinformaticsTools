@@ -14,7 +14,7 @@
 ########################################################################
 
 def vcfToMatrixHap():
-	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + ."txt", 'w') as out:
+	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + ".txt", 'w') as out:
 	results = [] 
 	data=[x.strip().split() for x in fi.readlines() if not 	x.startswith("##")] 
 	results.append("\t".join(data[0][0:2] + data[0][9:])) 
@@ -34,8 +34,8 @@ def vcfToMatrixHap():
 	for x in results:
 		out.write(f"{x}\n")
  
-def vcfToMatrix(vcf):
-	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + ."txt", 'w') as out:
+def vcfToMatrixDip(vcf):
+	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + ".txt", 'w') as out:
 	results = [] 
 	data=[x.strip().split() for x in fi.readlines() if not 	x.startswith("##")] 
 	results.append("\t".join(data[0][0:2] + data[0][9:])) 
