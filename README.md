@@ -52,4 +52,8 @@ Bioinformatics tools that i have written in python for various tasks
 
 13.) filterContifs.py: For filtering out small contigs from a genome assembly, renaming contigs and wrapping sequences
 	
-	python filterContifs.py --fasta <.fasta> --minLengh <500>  --contigName <contig> 
+	python filterContigs.py --fasta <.fasta> --minLengh <500>  --contigName <contig> 
+
+14.) calculateSequencingCoverage.py: For estimating sequencing coverge using fastq reads.
+
+	python calculateSequencingCoverage.py -i file.fastq file2.fastq fileX.fastq -s <size Mb>

@@ -5,7 +5,7 @@
 #  rename contigs and wrap sequences                                                 #
 #                                                                                    #
 # Usage example:                                                                     #
-# python filterContifs.py --fasta <.fasta> --minLengh <500>  --contigName <contig>   #
+# python filterContigs.py --fasta <.fasta> --minLengh <500>  --contigName <contig>   #
 #                                                                                    #
 # Written by John Connell                                                            #
 # john.connell@niab.com                                                              #
@@ -33,6 +33,8 @@ def filterAssembly(fasta,size,name):
 					seq = ""
 					continue
 			seq += x 
+		contigDict["".join([">",name,"_",str(i)])] = seq
+		
 		for x,y in contigDict.items():
 			fii.write(x + "\n")
 			for k in range(0, len(y), 60):
