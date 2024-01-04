@@ -3,7 +3,7 @@
 ########################################################################
 # Script to merge multipe VCF files into a single VCF                  #
 # This script is undoubtely amazing af but i wrote it for fun          #
-# Use bcftools/vcftools if you actually want to merge vcf files 🤣     #                                                                       #
+# Use bcftools/vcftools if you actually want to merge vcf files        #
 #                                                                      # 
 # Usage example:                                                       #
 # python mergeVCFs.py --vcf <.vcf> <.vcf> <.vcf>                       #
@@ -16,16 +16,17 @@
 import argparse,os
 from collections import defaultdict
 
-####Script Notes 
-# DICT POSOTIONS 
-# i[0] == #CHROM
-# i[1] == POS
-# i[2] == ID
-# i[3] == REF
-# i[4] == ALT
-# i[5] == QUAL
-# i[6] == FILTER
-# i[7] == FORMAT 
+""" 
+DICT POSOTIONS 
+i[0] == #CHROM
+i[1] == POS
+i[2] == ID
+i[3] == REF
+i[4] == ALT
+i[5] == QUAL
+i[6] == FILTER
+i[7] == FORMAT 
+"""
 
 headerSet = set()
 headerDict = defaultdict(list)
@@ -48,11 +49,31 @@ def mergeVCF(vcf):
 				if i.startswith("#"):
 					continue
 				i = i.split()
-				
-				if "".join(i[0:2]) not in vcfDict:
+				key = "".join(i[0:2])
+
+				if key in vcfDict:
+					ID REF ALT QUAL FILTER FORMAT = i[3:9]
+					
+####ID 					
+					if ID != vcfDict[key][0] and VCF[key][0] == ".":
+						vcfDict[key][0] = ID
+####REF				
+####ALT 			
+					if ALT != vcfDict[key][2]:
+						vcfDict[key][2] = ",".join([vcfDict[key][2], ALT])
+####QUAL
+					if float(QUAL) > float(vcfDict[key][3]):
+						vcfDict[key][3] = QUAL
+####FILTER 
+					
+
+
+
+					
+				else:
 					vcfDict["".join(i[0:2])].extend(i[3:])
-				else: ID REF ALT QUAL FILTER FORMAT = i[3:9]
-				 
+
+
 
 
 	for x,y in vcfDict.items():
