@@ -16,7 +16,7 @@
 
 def similarityMatrixHap(vcf):
 	matResults = []
-	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + "_matrix.txt", 'w') as fii:
+	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + "_similairty_matrix.txt", 'w') as fii:
 		data = [x.strip().split() for x in fi.readlines() if not x.startswith("##")]
 		matResults.append("\t".join([""] + data[0][9:]))
 		for i in range(9, len(data[0])):
@@ -32,11 +32,11 @@ def similarityMatrixHap(vcf):
 				row.append(str(int(match)/int(total)*100))
 			matResults.append("\t".join(row))
 		for x in matResults:
-		 	fii.write(f"{x}\n")
+			fii.write(f"{x}\n")
 
 def similarityMatrixDip(vcf):
 	matResults = []
-	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + "_matrix.txt", 'w') as fii:
+	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + "_similarity_matrix.txt", 'w') as fii:
 		data = [x.strip().split() for x in fi.readlines() if not x.startswith("##")]
 		matResults.append("\t".join([""] + data[0][9:]))
 		for i in range(9, len(data[0])):
@@ -73,9 +73,6 @@ def main():
 		similarityMatrixHap(parse.vcf)
 	else:
 		similarityMatrixDip(parse.vcf)
-
-
-
 
 if __name__ == "__main__":
 	import argparse, os

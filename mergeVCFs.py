@@ -13,6 +13,7 @@
 # NIAB                                                                 #
 # 2023                                                                 #
 ########################################################################
+
 import argparse,os
 from collections import defaultdict
 
@@ -58,6 +59,8 @@ def mergeVCF(vcf):
 					if ID != vcfDict[key][0] and VCF[key][0] == ".":
 						vcfDict[key][0] = ID
 ####REF				
+					if REF != vcfDict[key][1]:
+						vcfDict[key][1] = ",".join([vcfDict[key][1], REF])
 ####ALT 			
 					if ALT != vcfDict[key][2]:
 						vcfDict[key][2] = ",".join([vcfDict[key][2], ALT])
@@ -65,6 +68,7 @@ def mergeVCF(vcf):
 					if float(QUAL) > float(vcfDict[key][3]):
 						vcfDict[key][3] = QUAL
 ####FILTER 
+####FORMAT
 					
 
 
