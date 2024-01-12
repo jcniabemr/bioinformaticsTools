@@ -61,3 +61,8 @@ Bioinformatics tools that i have written in python for various tasks
 15.) mergeVCFs.py: For merging VCF files. 
 	
 	python mergeVCFs.py --vcf <.vcf1> <.vcf2> <.vcfx>  
+
+16.) calculateContigLenghts.py: For creating a file of contig lengths for a genome assembly. 
+	
+	python calculateContigLengths.py --assembly <genomeAssembly.fa>
+

@@ -16,7 +16,7 @@
 def vcfToMatrixHap(vcf):
 	with open(vcf, 'r') as fi, open(os.path.splitext(vcf)[0] + "_matrix.txt", 'w') as out:
 		results = [] 
-		data=[x.strip().split() for x in fi.readlines() if not 	x.startswith("##")] 
+		data=[x.strip().split() for x in fi.readlines() if not x.startswith("##")] 
 		results.append("\t".join(data[0][0:2] + data[0][9:])) 
 		for x in data[1:]:
 				if len(x[3]) > 1 or len(x[4]) > 1:
