@@ -66,3 +66,8 @@
 	
 	python calculateContigLengths.py --assembly <genomeAssembly.fa>
 
+17.) filterVCFdepth.py 
+
+18.) sortReadsByName.py
+
+19.) cutGenome.py

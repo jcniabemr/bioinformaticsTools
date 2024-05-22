@@ -18,6 +18,7 @@ def calculateLengths(g):
 					seqLenCounter = 0
 				continue
 			seqLenCounter += len(x)
+		contigLengthDict[contigName] = str(seqLenCounter)
 		contigLengthDict["Total len"] = sum([int(i) for i in contigLengthDict.values()])
 		for x,y in contigLengthDict.items():
 			out.write(f"{x}\t{y}\n")
