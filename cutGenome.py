@@ -16,7 +16,7 @@ def cutGenome(assembly,contig,start,end,step,window):
     finished = False
     seq = ""
     lenCounter = 0 
-    with open(assembly, 'r') as file, open(os.path.splitext(assembly)[0] + "_" + contig + "_" + str(start) + "_" + str(end) + "_" + str(window)+ "_" + str(step) + ".txt", 'w') as out:
+    with open(assembly, 'r') as file, open(os.path.splitext(assembly)[0] + "_" + contig + "_" + str(start) + "_" + str(end) + "_" + str(window)+ "_" + str(step) + ".fasta", 'w') as out:
         for x in file:
             x = x.strip()
             if x.startswith(">"+contig):
@@ -25,7 +25,7 @@ def cutGenome(assembly,contig,start,end,step,window):
             if found:
                 for i in x:
                     lenCounter += 1
-                    if lenCounter >= start:
+                    if lenCounter == start:
                         seq += i.upper()
                         if lenCounter == end:
                             finished = True
@@ -33,10 +33,10 @@ def cutGenome(assembly,contig,start,end,step,window):
             if finished:
                 break
         for i in range(0, len(seq), step):
-            start = start + i
-            newEnd = min(start, + i + window, len(seq))
-            out.write(f">{assembly.split('.')[0].split('/')[-1]}_{contig}_{start}_{start + newEnd}_{window}_{step}\n") 
-            out.write("\n".join([seq[o:o + 60] for o in range(i, newEnd, 60)]) + "\n")
+            newEnd = min(i + window, len(seq))
+            chunk = seq[i:newEnd]
+            out.write(f">{assembly.split('.')[0].split('/')[-1]}_{contig}_{start + i-1}_{start + i + window-1}_{window}_{step}\n") 
+            out.write("\n".join([chunk[o:o + 60] for o in range(0, len(chunk), 60)]) + "\n")
 
 def main():
     ap = argparse.ArgumentParser()
