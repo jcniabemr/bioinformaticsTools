@@ -4,7 +4,7 @@
 # Script to identify hrp box moteifs in selected genes                                    #   
 #                                                                                         #
 # Usage example:                                                                          #
-# python findHRP.py --assembly <.fasta> --geneList <comma sep list of genes> --gff <.gff> #
+# python findHRP.py --assembly <.fasta> --gff <.gff>                                      #
 #                                                                                         # 
 # hrp boxes have a conserved GGCACC-16N-CCAC seq starting 35bp upstream of ATG            # 
 # hrp seqs from https://onlinelibrary.wiley.com/doi/10.1046/j.1365-2958.2002.02964.x      # 
@@ -15,7 +15,13 @@
 # 2024                                                                                    #
 ###########################################################################################
 
-def searchHRP(assembly, contig, start, gene):
+def searchHRP(assembly, contig, start, gene, orient):
+	if orient == "+":
+		begin = max(1, start - 150)
+		end = start
+	else:
+		begin = start 
+		end = start + 150
 	seq = ""
 	seqCounter = 0
 	found = False
@@ -29,9 +35,9 @@ def searchHRP(assembly, contig, start, gene):
 			if found:
 				for i in line:
 					seqCounter += 1
-					if seqCounter >= max(1, start - 150):
+					if seqCounter >= begin:
 						seq += i
-						if seqCounter == start:
+						if seqCounter == end:
 							hrpA_Pos = re.compile(r'TGGAACC.{16}CCACCTA', re.IGNORECASE).finditer(seq)
 							hrpA_Neg = re.compile(r'TAGGTGG.{16}GGTTCCA', re.IGNORECASE).finditer(seq)
 							for x in hrpA_Pos:
@@ -65,7 +71,7 @@ def extractRegions(assembly, gff):
 	found = False
 	hits = []
 	hits.append("##gff-version 3")
-	with open(assembly, 'r') as genomeAssembly, open(gff, 'r') as gffFile:
+	with open(assembly, 'r') as genomeAssembly, open(gff, 'r') as gffFile, open(os.path.splitext(assembly)[0] + "_hrp_hits.gff", 'w') as out:
 		gffData = [x.strip().split() for x in gffFile.readlines() if not x.startswith("#")]
 		for line in gffData:
 			if line[2] == "gene":
@@ -73,14 +79,13 @@ def extractRegions(assembly, gff):
 				gene = line[8]
 				found = True
 				if line[6] == "+":
-					start  = line[3]
+					hits.extend(searchHRP(assembly,contig,int(line[3]),gene,"+"))
 				else:
-					start = line[4]
-				hits.extend(searchHRP(assembly,contig,int(start),gene))
+					hits.extend(searchHRP(assembly,contig,int(line[4]),gene,"-"))
 			else:
 				continue
 		for x in hits:
-		 	print(x)
+			out.write(f"{x}\n")
 
 def main():
 	ap = argparse.ArgumentParser()
@@ -88,13 +93,13 @@ def main():
 		'--assembly',
 		type = str,
 		required = True,
-		help = 'cds file'
+		help = 'genome assembly'
 	)
 	ap.add_argument(
 		'--gff',
 		type = str,
 		required = True,
-		help = 'cds file'
+		help = 'gff file'
 	)
 	parse = ap.parse_args()
 	extractRegions(parse.assembly,parse.gff)
