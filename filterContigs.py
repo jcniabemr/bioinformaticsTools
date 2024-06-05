@@ -33,7 +33,8 @@ def filterAssembly(fasta,size,name):
 					seq = ""
 					continue
 			seq += x 
-		contigDict["".join([">",name,"_",str(i)])] = seq
+		if len(seq) > int(size):
+			contigDict["".join([">",name,"_",str(i)])] = seq
 		
 		for x,y in contigDict.items():
 			fii.write(x + "\n")
