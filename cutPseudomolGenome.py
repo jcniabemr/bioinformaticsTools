@@ -21,13 +21,15 @@ def cutGenome(assembly,step,window):
 			if x.startswith(">"):
 				if found:
 					for n in range(0, len(seq), step):
+						fragmentCounter += 1 
 						newEnd = min(n + window, len(seq))
 						chunk = seq[n:newEnd]
-						out.write(f"{header}_{n}_{newEnd}_{window}_{step}\n") 
+						out.write(f"{header}_{n}_{newEnd}_{window}_{step}_fragment{fragmentCounter}\n") 
 						out.write("\n".join([chunk[o:o + 60] for o in range(0, len(chunk), 60)]) + "\n")
 				found = True
 				seq = ""
 				header = x
+				fragmentCounter = 0
 				continue
 			for i in x:
 				if i not in ['N', 'n']:
@@ -36,18 +38,20 @@ def cutGenome(assembly,step,window):
 				else:
 					if not written:
 						for n in range(0, len(seq), step):
+							fragmentCounter += 1 
 							newEnd = min(n + window, len(seq))
 							chunk = seq[n:newEnd]
-							out.write(f"{header}_{n}_{newEnd}_{window}_{step}\n") 
+							out.write(f"{header}_{n}_{newEnd}_{window}_{step}_fragment{fragmentCounter}\n") 
 							out.write("\n".join([chunk[o:o + 60] for o in range(0, len(chunk), 60)]) + "\n")
 						seq = ""
 						written = True
 					else:
 						continue 
 		for n in range(0, len(seq), step):
+			fragmentCounter += 1 
 			newEnd = min(n + window, len(seq))
 			chunk = seq[n:newEnd]
-			out.write(f"{header}_{n}_{newEnd}_{window}_{step}\n") 
+			out.write(f"{header}_{n}_{newEnd}_{window}_{step}_fragment{fragmentCounter}\n") 
 			out.write("\n".join([chunk[o:o + 60] for o in range(0, len(chunk), 60)]) + "\n")
 
 def main():
