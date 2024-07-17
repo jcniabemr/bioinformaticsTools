@@ -1,5 +1,18 @@
 #!/usr/bin/env python 
 
+########################################################################
+# Script to caluclate contig lengths                                   #
+#                                                                      # 
+# Usage example:                                                       #
+# python calculateContigLengths.py --assembly <assembly.fasta>         #
+#                                                                      #
+# Written by John Connell                                              #
+# john.connell@niab.com                                                #
+# NIAB                                                                 #
+# 2024                                                                 #
+########################################################################
+
+
 def calculateLengths(g):
 	contigFound = False
 	contigLengthDict = {}
