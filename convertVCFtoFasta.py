@@ -39,7 +39,6 @@ def createFasta(vcf):
 			with open(os.path.splitext(vcf)[0] + "_" + c + "_fasta.fa", 'w') as out:
 				out.write(">contig_1" + "\n")
 				out.write("\n".join([seq[k:k + 60] for k in range(0, len(seq), 60)]))
-			break 
 
 def main():
 	ap = argparse.ArgumentParser()

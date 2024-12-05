@@ -66,8 +66,14 @@
 	
 	python calculateContigLengths.py --assembly <genomeAssembly.fa>
 
-17.) filterVCFdepth.py 
+17.) filterVCFdepth.py: For filtering genotype depth in VCF file 
 
-18.) sortReadsByName.py
+	python filterVCFdepth.py --vcf file.vcf --minDP <integer> --maxDP <integer>
 
-19.) cutGenome.py
+18.) sortReadsByName.py: For sorting sequencing reads in fastq files by name as opposed to coordiante 
+
+	python sortReadsByName.py --readF <_1.fastq> --readR <_2.fastq>
+
+19.) cutGenome.py: Cut a genome into fragments between a defined region at defined intervals
+
+	python cutGenome.py --assembly --start --end --step --window --contig

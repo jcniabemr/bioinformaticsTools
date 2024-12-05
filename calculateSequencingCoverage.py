@@ -32,6 +32,8 @@ def calculateCoverage(f,s):
 		else:
 			with open(i, 'r') as file:
 				c += countBases(file)	
+	print(c)
+	print(str(int(1000000)*s))
 	print(str(round(int(c)/(int(1000000)*s))) + "x coverage")
 
 def main():
